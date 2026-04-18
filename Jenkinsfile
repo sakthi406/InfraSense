@@ -9,13 +9,14 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'pip install -r app/requirements.txt'
+                sh 'pip install --user -r app/requirements.txt'
             }
         }
 
         stage('Run Tests') {
             steps {
                 sh '''
+                export PATH=$HOME/.local/bin:$PATH
                 export PYTHONPATH=.
                 pytest
                 '''
